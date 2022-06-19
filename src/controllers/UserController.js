@@ -3,12 +3,11 @@ const User = require('../models/User.js')
 const bcrypt = require('bcryptjs')
 const authMiddleware = require('../middlewares/auth.js')
 const { scheduleFactory, validatePatient, validateRole, generateAccessToken, generateRandomToken } = require('../utils/functions')
-const { validate: cpfValidate } = require('gerador-validador-cpf')
 
 const router = new Router()
 
 //! Authenticate user
-router.post('/authenticate', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -47,7 +46,7 @@ router.get("/auth", authMiddleware, async (req, res) => {
   res.status(200).json({
     user: user.name,
     error: false,
-    message: "Usuário está autenticado"
+    message: "Usuário autenticado!"
   })
 });
 
@@ -60,13 +59,13 @@ router.post('/register', async (req, res) => {
 
     userData = { name, email, password }
 
-    if (await User.findOne({ email: userData.email })) return res.status(400).json({ error: 'E-mail is already registered!' })
+    if (await User.findOne({ email: userData.email })) return res.status(400).json({ error: 'E-mail já registrado.' })
 
 
     const user = await User.create(userData)
 
     user.password = undefined;
-    console.log(user)
+
     return res.status(200).json({
       error: false,
       message: "User registered successfully!",

@@ -46,7 +46,7 @@ router.post('/create', authMiddleware, async (req, res) => {
 })
 
 //! Get all treatment registered
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/all', authMiddleware, async (req, res) => {
     try {
         const treatment = await Treatment.find().populate('patient');
 
@@ -59,7 +59,7 @@ router.get('/', authMiddleware, async (req, res) => {
 })
 
 //! Get all treatment registered
-router.get('/:id', authMiddleware, async (req, res) => {
+router.get('/get/:id', authMiddleware, async (req, res) => {
     try {
         const treatment = await Treatment.findOne({ _id: id });
 
@@ -75,7 +75,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
 
 
 //! Update treatment
-router.put('/:id', authMiddleware, async (req, res) => {
+router.put('/put/:id', authMiddleware, async (req, res) => {
     const { id } = req.params
     let { patient, date, fee, formOfPayment, company, evolution, cid, doctor } = req.body
 
@@ -107,7 +107,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 });
 
 //! Delete a treatment
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/delete/:id', authMiddleware, async (req, res) => {
     const { id } = req.params
 
     try {

@@ -6,7 +6,7 @@ const {generateAccessToken} = require('../utils/functions')
 const router = new Router()
 
 //! Get all patient registered
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/all', authMiddleware, async (req, res) => {
   try {
     const patient = await Patient.find();
 
@@ -19,7 +19,7 @@ router.get('/', authMiddleware, async (req, res) => {
 })
 
 //! Get 
-router.get('/:id', async (req, res) => {
+router.get('/get/:id', async (req, res) => {
   const {id} = req.params
   try {
     const patient = await Patient.findOne({_id: id});
@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
 
 
 //! Update patient
-router.put('/:id', authMiddleware, async (req, res) => {
+router.put('/put/:id', authMiddleware, async (req, res) => {
   const { id } = req.params
   let { name, lastname, birthDate, cpf, company, occupation, email, phone, zipCode, street, number, addressDetails, district, city, state, observation} = req.body
 
@@ -75,7 +75,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 });
 
 //! Delete a patient
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/delete/:id', authMiddleware, async (req, res) => {
   const { id } = req.params
 
   try {

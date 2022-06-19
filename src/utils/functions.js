@@ -16,17 +16,6 @@ function parseSynonyms(synonyms = []) {
   return synonymsArray
 }
 
-function scheduleFactory(procedure = "", specification = "", date = new Date(), hour = "", place = "", status = "Agendado") {
-  return {
-    procedure,
-    specification,
-    date: new Date(date),
-    hour,
-    place,
-    status
-  }
-}
-
 function validatePatient(patient = {}) {
   try {
     const {name, email, birthDate, password} = patient
@@ -135,7 +124,6 @@ function generateRandomToken() {
 
 module.exports = {
   parseSynonyms,
-  scheduleFactory,
   validatePatient,
   generateAccessToken,
   generateRandomToken

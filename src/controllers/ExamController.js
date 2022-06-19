@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(authMiddleware)
 
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/all', authMiddleware, async (req, res) => {
   try {
     const exam = await Exam.find().populate('patient');
 
@@ -52,7 +52,7 @@ router.post('/create', authMiddleware, async (req, res) => {
   }
 })
 
-router.get('/:id', authMiddleware, async (req, res) => {
+router.get('/get/:id', authMiddleware, async (req, res) => {
   const { id } = req.params
   try {
     const exam = await Exam.findOne({ _id: id });
@@ -65,7 +65,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
   }
 })
 
-router.put('/:id', authMiddleware, async (req, res) => {
+router.put('/put/:id', authMiddleware, async (req, res) => {
   const { name, price, description, synonyms } = req.body
   const { id } = req.params
 
@@ -92,7 +92,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
   }
 })
 
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/delete/:id', authMiddleware, async (req, res) => {
   const { id } = req.params
 
   try {
